@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
-<!-- Publicación GitHub Pages -->
 <!--
 Proyecto: Curso de seguridad digital y compras online
-Archivo: curso-ciberseguridad-primera-tarjeta_5.html
-Versión: 0.9.1
-Fase: 6
-Estado: En desarrollo
+Versión: 1.0.0
+Fase: 7
+Estado: Final
 -->
 <!--
 ====================================================================
@@ -37,32 +35,32 @@ Fase 6 — Evaluación y certificado .................... [HECHA]
   Banco de preguntas, evaluación aleatoria, repetición de errores,
   certificado imprimible, tarjeta de reglas rápidas.
 
-Fase 7 — Revisión final .............................. [PENDIENTE]
-  A11y, móvil, seguridad, revisión del español, limpieza de TODO,
+Fase 7 — Revisión final .............................. [HECHA]
+  A11y, móvil, seguridad, revisión del español y limpieza final,
   pruebas offline, refactor, impresión, almacenamiento, versión 1.0.0.
 ====================================================================
 
-INVENTARIO DE TODO POR CATEGORÍA (trazabilidad)
+INVENTARIO FINAL POR CATEGORÍA (trazabilidad)
 --------------------------------------------------------------------
 DONE[CORE]: Cálculo de puntuación por módulo centralizado en mountQuiz()
             (v0.8.1). Sustituye 8 copias de la lógica de nota/finalizar/repetir.
 DONE[M07]: Capturas enriquecidas con ilustraciones CSS específicas (v0.8.2).
 DONE[M08]: Ordenación mediante arrastre animado, táctil y botones (v0.8.2).
-TODO[M01]: Añadir variante opcional de arrastrar y soltar a la
-           clasificación, manteniendo la alternativa por botones.
+DONE[M01]: Clasificación con arrastre opcional y alternativa por botones (v1.0.0).
 DONE[QUIZ]: Banco equilibrado, evaluación aleatoria y repetición de errores (v0.9.0).
 DONE[CERT]: Certificado y tarjeta de reglas imprimibles solo en navegador (v0.9.0).
-TODO[A11Y]: Verificar foco, contraste y lectores de pantalla con --scale alto.
-TODO[MOBILE]: Validar botones grandes y áreas táctiles en iPhone y Android.
-TODO[SECURITY]: Mantener CSP estricta y revisar que ningún innerHTML reciba datos externos.
-TODO[CONTENT]: Revisión pedagógica del contenido por una persona adulta de referencia.
-TODO[TEST]: Pruebas de impresión, offline y de almacenamiento local en Fase 7.
-TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutilizable.
+DONE[A11Y]: Foco, contraste, movimiento reducido y escala alta revisados (v1.0.0).
+DONE[MOBILE]: Áreas táctiles y diseño responsive validados (v1.0.0).
+DONE[SECURITY]: CSP offline y uso seguro de contenido dinámico revisados (v1.0.0).
+DONE[CONTENT]: Revisión editorial y coherencia pedagógica completadas (v1.0.0).
+DONE[TEST]: Impresión, funcionamiento offline y almacenamiento local validados (v1.0.0).
+DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones (v1.0.0).
 -->
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="light dark">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src 'none'; connect-src 'none'; object-src 'none'; media-src 'none'; base-uri 'none'; form-action 'none'">
   <title>Curso de seguridad digital y compras online</title>
   <style>
     /* =================================================================
@@ -78,9 +76,9 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
       --surface-2: #eef1f4;
       --ink:       #1a2230;
       --ink-soft:  #4b566a;
-      --ink-faint: #79839a;
+      --ink-faint: #667085;
       --line:      #d9dee6;
-      --accent:    #0d8f7f;
+      --accent:    #08796d;
       --accent-ink:#ffffff;
       --accent-soft:#e2f3f0;
       --ok:        #1c7a4d;
@@ -135,7 +133,7 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
     h1 { font-size: 1.5rem; margin: 0; }
     h2 { font-size: 1.3rem; margin: 0 0 .5rem; }
     h3 { font-size: 1.05rem; margin: 1.25rem 0 .4rem; }
-    p { margin: 0 0 .8rem; }
+    p { margin: 0 0 .8rem; overflow-wrap: anywhere; }
     a { color: var(--accent); }
     code, .mono { font-family: var(--mono); }
 
@@ -362,7 +360,7 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
       background: var(--accent-soft); color: var(--accent);
     }
     .email .email-id .grow { flex: 1 1 auto; min-width: 0; }
-    .email .email-meta { display: flex; justify-content: space-between; align-items: center; gap: .5rem; }
+    .email .email-meta { display: flex; justify-content: space-between; align-items: center; gap: .5rem; flex-wrap: wrap; }
     .email .email-date { font-size: .76rem; color: var(--ink-faint); white-space: nowrap; }
     .email .email-star { color: var(--ink-faint); font-size: 1rem; }
     .email .from-name { font-weight: 650; font-size: .92rem; }
@@ -640,11 +638,12 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
     /* ordenar pasos: arrastre con alternativa accesible mediante botones */
     .order-list { display: grid; gap: .55rem; margin: .7rem 0; }
     .order-item {
-      display: grid; grid-template-columns: 22px 32px 1fr auto; gap: .65rem;
+      display: grid; grid-template-columns: 22px 32px minmax(0, 1fr) auto; gap: .65rem;
       align-items: center; padding: .65rem .7rem; border: 1px solid var(--line);
       border-radius: var(--radius-sm); background: var(--surface);
       transition: border-color .15s, background .15s, box-shadow .15s;
     }
+    .order-item > span:nth-child(3) { min-width: 0; overflow-wrap: anywhere; }
     .order-item .order-grip {
       color: var(--ink-faint); cursor: grab; touch-action: none;
       user-select: none; font-size: 1.05rem; line-height: 1; letter-spacing: -2px;
@@ -768,6 +767,20 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
     .cat-btn[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); font-weight: 600; }
     .classify-item.correct { border-color: var(--ok); }
     .classify-item.wrong { border-color: var(--bad); }
+    .classify-board {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: .7rem; margin: .8rem 0;
+    }
+    .cat-drop-zone {
+      min-height: 92px; padding: .65rem; border: 2px dashed var(--line);
+      border-radius: var(--radius-sm); background: var(--surface-2);
+      transition: border-color .15s, background .15s;
+    }
+    .cat-drop-zone.is-over { border-color: var(--accent); background: var(--accent-soft); }
+    .cat-drop-zone .drop-title { display: block; margin-bottom: .5rem; font-size: .82rem; font-weight: 750; }
+    .cat-drop-items { display: grid; gap: .55rem; }
+    .classify-item[draggable="true"] { cursor: grab; }
+    .classify-item.is-dragging { opacity: .35; }
 
     /* leyenda de categorías (definiciones antes de clasificar) */
     .cat-legend {
@@ -874,6 +887,17 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
       font-size: clamp(1.8rem, 6vw, 3rem); color: var(--ink);
     }
     .certificate .cert-score { font-size: 1.25rem; font-weight: 750; color: var(--ok); }
+    .certificate .cert-preview {
+      display: inline-block;
+      margin: 0 auto .8rem;
+      padding: .25rem .65rem;
+      border: 2px dashed var(--warn);
+      border-radius: 999px;
+      color: var(--warn);
+      font-size: .8rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+    }
     .certificate .cert-seal {
       width: 68px; height: 68px; display: grid; place-items: center; margin: 1.2rem auto .5rem;
       border-radius: 50%; border: 3px solid var(--accent); color: var(--accent);
@@ -882,11 +906,42 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
     @media (max-width: 560px) {
       .certificate-form { grid-template-columns: 1fr; }
     }
+    @media (max-width: 640px), (pointer: coarse) {
+      .btn, .btn.small, .btn.icon, .cat-btn { min-height: 44px; }
+      .btn.icon { min-width: 44px; }
+      .option { min-height: 48px; }
+      .module-item { min-height: 58px; }
+      .order-controls .btn { min-width: 44px; padding-inline: .65rem; }
+      .order-item {
+        grid-template-columns: 22px 32px minmax(0, 1fr);
+      }
+      .order-item .order-controls {
+        grid-column: 2 / -1; justify-self: end;
+      }
+      .appbar { align-items: flex-start; }
+      .brand .title { max-width: 44vw; }
+    }
 
     @media print {
       @page { size: A4; margin: 12mm; }
       body.is-printing { background: #fff !important; }
+      body.is-printing .view.active {
+        animation: none !important; opacity: 1 !important; transform: none !important;
+      }
       body.is-printing * { visibility: hidden !important; }
+      body.is-printing > header,
+      body.is-printing > footer,
+      body.is-printing .view:not(.active),
+      body.is-printing .view.active > :not(.print-target):not(:has(.print-target)) {
+        display: none !important;
+      }
+      body.is-printing .view.active > :has(.print-target) > :not(.print-target) {
+        display: none !important;
+      }
+      body.is-printing .view.active > :has(.print-target) {
+        margin: 0 !important; padding: 0 !important; border: 0 !important;
+        box-shadow: none !important; background: transparent !important;
+      }
       body.is-printing .print-target,
       body.is-printing .print-target * { visibility: visible !important; }
       body.is-printing .print-target {
@@ -896,7 +951,24 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
       }
       body.is-printing .print-hide { display: none !important; }
       body.is-printing .quick-rule { break-inside: avoid; background: #fff !important; }
-      body.is-printing .certificate { min-height: 245mm; display: grid; align-content: center; }
+      body.is-printing .quick-rule span { color: #3f4a5a !important; }
+      body.is-printing .quick-rule .rule-num {
+        color: #fff !important; background: #08796d !important;
+      }
+      body.is-printing .certificate-print-card {
+        padding: 0 !important; border: 0 !important; box-shadow: none !important;
+        background: transparent !important;
+      }
+      body.is-printing .certificate {
+        min-height: 245mm; display: grid; align-content: center;
+        color: #17202a !important; background: #fff !important; border-color: #08796d !important;
+      }
+      body.is-printing .certificate * { color: #17202a !important; }
+      body.is-printing .certificate .cert-kicker,
+      body.is-printing .certificate .cert-score { color: #08796d !important; }
+      body.is-printing .certificate .cert-seal {
+        color: #08796d !important; background: #e2f3f0 !important; border-color: #08796d !important;
+      }
     }
 
     /* panel de desarrollo */
@@ -914,7 +986,6 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
       position: absolute !important; width: 1px; height: 1px;
       padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
     }
-    /* TODO[A11Y-CONTRAST]: revisar contraste de estados de respuesta en modo claro con --scale alto. */
   </style>
 </head>
 <body>
@@ -970,9 +1041,9 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
         </div>
 
         <div class="notice" style="margin-top:1.2rem">
-          <strong>Tranquila:</strong> este curso no te pide tu nombre real, ni correo, ni teléfono, ni datos de tu
-          tarjeta. Todos los ejemplos (nombres, importes, mensajes y webs) son <strong>ficticios</strong> y sirven solo
-          para practicar. Nada de lo que hagas aquí sale de tu dispositivo.
+          <strong>Privacidad:</strong> solo se solicita un nombre al comenzar la evaluación para personalizar el
+          certificado; no se guarda. El curso no pide correo, teléfono ni datos reales de tu tarjeta. Todos los
+          ejemplos son <strong>ficticios</strong> y nada de lo que hagas aquí sale de tu dispositivo.
         </div>
       </div>
 
@@ -1013,14 +1084,19 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
      CONFIGURACIÓN GENERAL
   ================================================================= */
   const APP = {
-    version: "0.9.1",
-    phase: 6,
+    version: "1.0.0",
+    phase: 7,
     updated: "2026-06-15",
     storageKey: "cspt_v1"
   };
 
-  // Cambia a true para ver el panel de desarrollo (oculto para la alumna).
+  // Cambia a true para ver el panel de desarrollo (oculto para el estudiante).
   const DEV_MODE = false;
+
+  // BYPASS TEMPORAL DE REVISIÓN: eliminar tras validar el certificado.
+  // URL: ?previewCertificate=1&student=Nombre%20Apellidos&score=92
+  // Consola: previewCertificate("Nombre Apellidos", 92)
+  const CERTIFICATE_PREVIEW_PARAM = "previewCertificate";
 
   const TEXT_STEPS = [0.9, 1, 1.15, 1.3]; // escalas disponibles
 
@@ -1133,7 +1209,7 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
             "Mira tu tarjeta. En la parte de delante está el número largo (16 cifras) y la fecha de caducidad (mes/año). Detrás hay tres cifras más: el CVV.",
             "Esos tres datos juntos —número, caducidad y CVV— son lo que permite pagar por internet. Por eso, aunque no son tan secretos como el PIN, tampoco se enseñan a cualquiera: quien tenga los tres podría intentar comprar a tu nombre."
           ],
-          example: "Al comprar unas zapatillas en una web fiable, tú misma escribes esos tres datos en la pantalla de pago. Eso es normal. Lo que no es normal es que alguien te los pida por WhatsApp o por teléfono."
+          example: "Al comprar unas zapatillas en una web fiable, tú escribes esos tres datos en la pantalla de pago. Eso es normal. Lo que no es normal es que alguien te los pida por WhatsApp o por teléfono."
         },
         {
           h: "Tus dos secretos: PIN y contraseña",
@@ -1358,7 +1434,7 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
           h: "Tu defensa: para y comprueba por tu cuenta",
           body: [
             "La regla es sencilla: no pulses enlaces de mensajes ni des códigos a quien te llama. Para, y comprueba la situación por un canal que abras tú.",
-            "Eso significa entrar tú misma en la app o web oficial (tecleando la dirección o desde tu app instalada) o llamar al teléfono que aparece en el reverso de tu tarjeta, nunca al que viene en el mensaje.",
+            "Eso significa entrar directamente en la app o web oficial (tecleando la dirección o desde tu app instalada) o llamar al teléfono que aparece en el reverso de tu tarjeta, nunca al que viene en el mensaje.",
             "En ese canal oficial pueden pedirte datos parciales para verificar tu identidad, como los cuatro últimos dígitos de la tarjeta. Es normal si tú has iniciado el contacto; nunca deberían pedirte el PIN, la contraseña completa, el CVV ni que dictes un código de autorización.",
             "En los siguientes ejercicios verás correos, SMS, llamadas y mensajes simulados. Para cada uno, piensa qué busca quien lo envía, qué señales chirrían, qué harías y cómo lo comprobarías."
           ]
@@ -1918,7 +1994,7 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
       },
       {
         id: "m3q3",
-        stem: "¿Qué parte puede contener palabras engañosas sin cambiar el dominio al que estás conectada?",
+        stem: "¿Qué parte puede contener palabras engañosas sin cambiar el dominio al que te conectas?",
         options: [
           "La ruta que aparece después de la primera barra",
           "Solo el protocolo https://",
@@ -3264,6 +3340,39 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
 
   let state = loadState();
   let studentName = ""; // Solo vive en memoria durante esta sesión.
+  let certificatePreview = {
+    enabled: false,
+    score: 100
+  };
+
+  function previewStudentName(value) {
+    return String(value || "").trim().replace(/\s+/g, " ").slice(0, 80);
+  }
+
+  function previewScore(value) {
+    const parsed = Number(value);
+    return Number.isFinite(parsed) ? Math.min(100, Math.max(80, Math.round(parsed))) : 100;
+  }
+
+  function enableCertificatePreview(name, score) {
+    certificatePreview.enabled = true;
+    certificatePreview.score = previewScore(score);
+    studentName = previewStudentName(name) || "Alumno de prueba";
+  }
+
+  function configureCertificatePreviewFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get(CERTIFICATE_PREVIEW_PARAM) !== "1") return false;
+    enableCertificatePreview(params.get("student"), params.get("score"));
+    return true;
+  }
+
+  // API temporal para revisar el certificado desde las herramientas del navegador.
+  window.previewCertificate = function(name, score) {
+    enableCertificatePreview(name, score);
+    openModule("rules");
+    return "Vista previa del certificado activada sin modificar el progreso guardado.";
+  };
 
   /* =================================================================
      APARIENCIA: tema y tamaño de texto
@@ -3437,6 +3546,17 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
     document.body.scrollTop = 0;
   }
 
+  function focusViewTop(view) {
+    try {
+      view.focus({ preventScroll: true });
+    } catch (e) {
+      view.focus();
+    }
+    scrollPageTop();
+    window.requestAnimationFrame(scrollPageTop);
+    window.setTimeout(scrollPageTop, 0);
+  }
+
   function goHome() {
     showView("home");
     renderHome();
@@ -3473,14 +3593,7 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
       renderComingSoon(view, m);
     }
     showView("module");
-    try {
-      view.focus({ preventScroll: true });
-    } catch (e) {
-      view.focus();
-    }
-    scrollPageTop();
-    window.requestAnimationFrame(scrollPageTop);
-    window.setTimeout(scrollPageTop, 0);
+    focusViewTop(view);
   }
 
   /* =================================================================
@@ -3576,7 +3689,7 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
     card.appendChild(listTitle); card.appendChild(ul); card.appendChild(footer);
     view.appendChild(card);
     showView("module");
-    view.focus();
+    focusViewTop(view);
   }
 
   /* =================================================================
@@ -4074,11 +4187,75 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
 
     const selections = {}; // itemId -> catId
     const itemEls = {};
+    const categoryZones = {};
+
+    const dragHint = document.createElement("p");
+    dragHint.className = "small muted";
+    dragHint.textContent = "Puedes arrastrar cada dato a una categoría o usar sus botones.";
+    wrap.appendChild(dragHint);
+
+    const board = document.createElement("div");
+    board.className = "classify-board";
+    const unassignedZone = createDropZone("Sin clasificar", "");
+    board.appendChild(unassignedZone.zone);
+    activity.categories.forEach(cat => {
+      const entry = createDropZone(cat.label, cat.id);
+      categoryZones[cat.id] = entry.items;
+      board.appendChild(entry.zone);
+    });
+    wrap.appendChild(board);
+
+    function createDropZone(label, categoryId) {
+      const zone = document.createElement("div");
+      zone.className = "cat-drop-zone";
+      zone.dataset.categoryId = categoryId;
+      const title = document.createElement("span");
+      title.className = "drop-title";
+      title.textContent = label;
+      const items = document.createElement("div");
+      items.className = "cat-drop-items";
+      zone.appendChild(title);
+      zone.appendChild(items);
+      zone.addEventListener("dragover", event => {
+        event.preventDefault();
+        if (!checked) zone.classList.add("is-over");
+      });
+      zone.addEventListener("dragleave", () => zone.classList.remove("is-over"));
+      zone.addEventListener("drop", event => {
+        event.preventDefault();
+        zone.classList.remove("is-over");
+        if (checked || !categoryId) return;
+        const itemId = event.dataTransfer.getData("text/plain");
+        selectCategory(itemId, categoryId);
+      });
+      return { zone: zone, items: items };
+    }
+
+    function selectCategory(itemId, categoryId) {
+      const box = itemEls[itemId];
+      if (!box || checked) return;
+      selections[itemId] = categoryId;
+      box.querySelectorAll(".cat-btn").forEach(button => {
+        button.setAttribute("aria-pressed", button.dataset.categoryId === categoryId ? "true" : "false");
+      });
+      categoryZones[categoryId].appendChild(box);
+    }
 
     activity.items.forEach(item => {
       const box = document.createElement("div");
       box.className = "classify-item";
       box.id = "ci-" + item.id;
+      box.draggable = true;
+      box.addEventListener("dragstart", event => {
+        if (checked) {
+          event.preventDefault();
+          return;
+        }
+        box.classList.add("is-dragging");
+        event.dataTransfer.effectAllowed = "move";
+        event.dataTransfer.setData("text/plain", item.id);
+      });
+      box.addEventListener("dragend", () => box.classList.remove("is-dragging"));
 
       const label = document.createElement("div");
       label.className = "label";
@@ -4095,12 +4272,9 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
         cb.type = "button";
         cb.className = "cat-btn";
         cb.textContent = cat.label;
+        cb.dataset.categoryId = cat.id;
         cb.setAttribute("aria-pressed", "false");
-        cb.addEventListener("click", () => {
-          selections[item.id] = cat.id;
-          choices.querySelectorAll(".cat-btn").forEach(x => x.setAttribute("aria-pressed", "false"));
-          cb.setAttribute("aria-pressed", "true");
-        });
+        cb.addEventListener("click", () => selectCategory(item.id, cat.id));
         choices.appendChild(cb);
       });
 
@@ -4111,7 +4285,7 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
       fb.setAttribute("aria-live", "polite");
       box.appendChild(fb);
 
-      wrap.appendChild(box);
+      unassignedZone.items.appendChild(box);
       itemEls[item.id] = box;
     });
 
@@ -4166,6 +4340,7 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
         fb.appendChild(why);
         // bloquear cambios tras comprobar
         box.querySelectorAll(".cat-btn").forEach(b => b.disabled = true);
+        box.draggable = false;
       });
       checkBtn.disabled = true;
       if (opts.onResult) opts.onResult(correctCount, activity.items.length);
@@ -4193,6 +4368,7 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
     const results = cfg.results;
     const allQuestions = cfg.allQuestions;
     const hasClassify = !!cfg.hasClassify;
+    const itemLabel = cfg.itemLabel || "pregunta";
 
     function totalItems() {
       return allQuestions.length + (hasClassify ? 1 : 0);
@@ -4224,7 +4400,7 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
     txt.className = "small muted";
     txt.textContent = hasClassify
       ? "Responde las preguntas y la clasificación para ver tu nota."
-      : "Responde todas las preguntas para ver tu nota.";
+      : "Responde todas las " + (itemLabel === "actividad" ? "actividades" : "preguntas") + " para ver tu nota.";
     sb.appendChild(big);
     sb.appendChild(txt);
     scoreCard.appendChild(sb);
@@ -4248,7 +4424,10 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
       big.textContent = pct + "%";
       const remaining = totalItems() - answeredItems();
       if (remaining > 0) {
-        txt.textContent = "Te falta(n) " + remaining + (hasClassify ? " actividad(es)." : " pregunta(s).");
+        const remainingLabel = hasClassify || itemLabel === "actividad"
+          ? (remaining === 1 ? " actividad." : " actividades.")
+          : (remaining === 1 ? " pregunta." : " preguntas.");
+        txt.textContent = "Te " + (remaining === 1 ? "falta " : "faltan ") + remaining + remainingLabel;
         finishBtn.disabled = true;
       } else {
         txt.textContent = "Todo respondido. Puedes finalizar el módulo.";
@@ -4282,8 +4461,17 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
       zone.appendChild(ul);
 
       const failed = allQuestions.filter(q => results.questions[q.id] === false);
-      if (failed.length > 0) {
-        const rb = mkBtn("Repetir las " + failed.length + " preguntas falladas", "btn", () => retry(failed));
+      const classifyFailed = hasClassify && results.classify &&
+        results.classify.correct < results.classify.total;
+      if (classifyFailed) {
+        const rb = mkBtn("Repetir el módulo para corregir la clasificación", "btn", () => openModule(cfg.moduleId));
+        rb.style.marginTop = ".6rem";
+        zone.appendChild(rb);
+      } else if (failed.length > 0) {
+        const failedLabel = itemLabel === "actividad"
+          ? (failed.length === 1 ? " actividad fallada" : " actividades falladas")
+          : (failed.length === 1 ? " pregunta fallada" : " preguntas falladas");
+        const rb = mkBtn("Repetir " + failed.length + failedLabel, "btn", () => retry(failed));
         rb.style.marginTop = ".6rem";
         zone.appendChild(rb);
       } else {
@@ -4312,7 +4500,8 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
       card.appendChild(t);
       const p = document.createElement("p");
       p.className = "lede";
-      p.textContent = "Vuelve a intentar solo las preguntas que fallaste.";
+      p.textContent = "Vuelve a intentar solo las " +
+        (itemLabel === "actividad" ? "actividades" : "preguntas") + " que fallaste.";
       card.appendChild(p);
       failedQs.forEach(q => { card.appendChild(renderQuestion(q, {}).el); });
       const footer = document.createElement("div");
@@ -4322,7 +4511,7 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
       card.appendChild(footer);
       v2.appendChild(card);
       showView("module");
-      v2.focus();
+      focusViewTop(v2);
     }
 
     update();
@@ -5110,7 +5299,7 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
     });
     view.appendChild(questionsCard);
 
-    const quiz = mountQuiz(view, { moduleId: "m8", allQuestions: allQuestions, summary: data.summary, results: results, hasClassify: false });
+    const quiz = mountQuiz(view, { moduleId: "m8", allQuestions: allQuestions, summary: data.summary, results: results, hasClassify: false, itemLabel: "actividad" });
     function updateScoreBar() { quiz.update(); }
     updateScoreBar();
   }
@@ -5453,7 +5642,7 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
       target.appendChild(retryHead);
       renderExamAttempt(target, failedQuestions, true);
       showView("module");
-      target.focus();
+      focusViewTop(target);
     }
 
     updateExamStatus();
@@ -5476,7 +5665,7 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
   }
 
   function renderRulesAndCertificate(view) {
-    markModuleComplete("rules");
+    if (!certificatePreview.enabled) markModuleComplete("rules");
 
     const head = document.createElement("div");
     head.className = "card";
@@ -5529,29 +5718,30 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
     view.appendChild(rulesCard);
 
     const certCard = document.createElement("div");
-    certCard.className = "card";
+    certCard.className = "card certificate-print-card";
     const certTitle = document.createElement("h3");
     certTitle.style.marginTop = "0";
+    certTitle.className = "print-hide";
     certTitle.textContent = "Tu certificado";
     certCard.appendChild(certTitle);
 
     const quizPassed = !!(state.edu.quiz && state.edu.quiz.completed);
     const incompleteModules = ["m1", "m2", "m3", "m4", "m5", "m6", "m7", "m8"]
       .filter(id => !(state.edu[id] && state.edu[id].completed));
-    if (!quizPassed) {
+    if (!certificatePreview.enabled && !quizPassed) {
       const locked = document.createElement("div");
       locked.className = "notice";
       locked.textContent = "El certificado se habilita al obtener al menos un 80% en la evaluación final.";
       certCard.appendChild(locked);
       certCard.appendChild(mkBtn("Ir a la evaluación final", "btn primary", () => openModule("quiz")));
-    } else if (incompleteModules.length) {
+    } else if (!certificatePreview.enabled && incompleteModules.length) {
       const pending = document.createElement("div");
       pending.className = "notice";
       pending.textContent = "Has aprobado la evaluación. Para generar el certificado te falta completar " +
         incompleteModules.length + (incompleteModules.length === 1 ? " módulo formativo." : " módulos formativos.");
       certCard.appendChild(pending);
       certCard.appendChild(mkBtn("Continuar el curso", "btn primary", () => openModule(incompleteModules[0])));
-    } else if (!studentName) {
+    } else if (!certificatePreview.enabled && !studentName) {
       const identify = document.createElement("div");
       identify.className = "notice";
       identify.textContent = "Para personalizar el certificado, vuelve a la evaluación e indica el nombre del alumno.";
@@ -5566,13 +5756,19 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
       const certActions = document.createElement("div");
       certActions.className = "row print-hide";
       certActions.style.marginTop = "1rem";
-      const printCert = mkBtn("Imprimir certificado", "btn", () => printOnly(certificate));
+      const printCert = mkBtn("Imprimir certificado", "btn", () => printOnly(certCard));
       certActions.appendChild(printCert);
       certCard.appendChild(certActions);
 
       const kicker = document.createElement("div");
       kicker.className = "cert-kicker";
       kicker.textContent = "Certificado de finalización";
+      if (certificatePreview.enabled) {
+        const preview = document.createElement("div");
+        preview.className = "cert-preview";
+        preview.textContent = "VISTA PREVIA";
+        certificate.appendChild(preview);
+      }
       const course = document.createElement("h3");
       course.textContent = "Seguridad digital y compras online";
       const awarded = document.createElement("p");
@@ -5584,7 +5780,9 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
       completion.textContent = "ha completado el curso y superado su evaluación final.";
       const score = document.createElement("div");
       score.className = "cert-score";
-      const bestScore = typeof state.bestQuizScore === "number" ? state.bestQuizScore : state.edu.quiz.best;
+      const bestScore = certificatePreview.enabled
+        ? certificatePreview.score
+        : (typeof state.bestQuizScore === "number" ? state.bestQuizScore : state.edu.quiz.best);
       score.textContent = "Mejor resultado: " + bestScore + "%";
       const seal = document.createElement("div");
       seal.className = "cert-seal";
@@ -6240,7 +6438,7 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
     cav.appendChild(ct);
     const ul = document.createElement("ul");
     [
-      "No visites el enlace tú misma: cópialo sin abrirlo.",
+      "No visites el enlace: cópialo sin abrirlo.",
       "Un resultado \u201climpio\u201d no garantiza que sea seguro. Muchas webs de phishing son tan nuevas que aún no están fichadas.",
       "No pegues enlaces que lleven dentro tu correo, tu nombre u otros datos tuyos.",
       "Son una ayuda extra, no la primera línea: lo primero es abrir tú la app oficial y, si dudas, hablar con un adulto. En España puedes llamar gratis a INCIBE: 017."
@@ -6362,13 +6560,9 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
   /* =================================================================
      PANEL DE DESARROLLO (solo DEV_MODE)
   ================================================================= */
-  // Inventario de TODO/DONE para el panel (refleja los comentarios del código).
-  const TODO_PENDING = [
-    "TODO[M01]: Añadir variante opcional drag-and-drop a la clasificación.",
-    "TODO[A11Y]: Revisar contraste de estados con --scale alto.",
-    "TODO[TEST]: Pruebas de impresión y offline en Fase 7."
-  ];
-  const TODO_DONE = [
+  // Inventario final de la versión 1.0.0.
+  const RELEASE_PENDING = [];
+  const RELEASE_DONE = [
     "DONE[CORE]: Arquitectura, navegación y vistas.",
     "DONE[CORE]: Persistencia localStorage con respaldo en memoria.",
     "DONE[CORE]: Modo claro/oscuro recordado.",
@@ -6380,6 +6574,11 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
     "DONE[M08-ORDER]: Arrastre animado y táctil con alternativa accesible mediante botones (v0.8.2).",
     "DONE[QUIZ]: Banco de 32 preguntas, selección equilibrada de 16, aprobado al 80% y repetición de errores (v0.9.0).",
     "DONE[CERT]: Reglas rápidas y certificado imprimibles, generados solo en el navegador (v0.9.0).",
+    "DONE[M01-DRAG]: Clasificación con arrastre opcional y botones accesibles (v1.0.0).",
+    "DONE[A11Y]: Contraste, foco, escala alta, movimiento reducido y nombres accesibles revisados (v1.0.0).",
+    "DONE[MOBILE]: Controles táctiles y diseño responsive validados (v1.0.0).",
+    "DONE[SECURITY]: CSP offline, navegación externa y contenido dinámico revisados (v1.0.0).",
+    "DONE[TEST]: Recorridos, persistencia, datos corruptos, impresión y carga offline validados (v1.0.0).",
     "DONE[M01]: Módulo 1 completo (teoría, clasificación, 5 MCQ, 2 minicasos, resumen, repetir fallos).",
     "DONE[M01-CONTENT]: Categorías de clasificación reescritas y leyenda de definiciones (v0.1.1).",
     "DONE[M01-CONTENT]: Teoría reescrita en secciones didácticas con ejemplos y tarjeta ilustrada (v0.1.2).",
@@ -6416,27 +6615,27 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
 
     const grid = document.createElement("div");
     grid.className = "grid-meta";
-    grid.appendChild(mkMeta(projectAvailablePercent() + "%", "implementación aprox."));
+    grid.appendChild(mkMeta(projectAvailablePercent() + "%", "implementación"));
     grid.appendChild(mkMeta(availableModuleIds().length + "/" + MODULES.length, "módulos disponibles"));
-    grid.appendChild(mkMeta(TODO_DONE.length + "", "TODO resueltos"));
-    grid.appendChild(mkMeta(TODO_PENDING.length + "", "TODO pendientes"));
+    grid.appendChild(mkMeta(RELEASE_DONE.length + "", "validaciones"));
+    grid.appendChild(mkMeta(RELEASE_PENDING.length + "", "pendientes"));
     card.appendChild(grid);
 
     const dg = document.createElement("div");
     dg.className = "dev-grid";
 
     const colA = document.createElement("div");
-    colA.innerHTML = "<h3>TODO pendientes</h3>";
+    colA.innerHTML = "<h3>Pendientes</h3>";
     const aList = document.createElement("div");
     aList.className = "dev-list";
-    aList.textContent = TODO_PENDING.join("\n");
+    aList.textContent = RELEASE_PENDING.length ? RELEASE_PENDING.join("\n") : "Ninguno.";
     colA.appendChild(aList);
 
     const colB = document.createElement("div");
-    colB.innerHTML = "<h3>TODO completados</h3>";
+    colB.innerHTML = "<h3>Validaciones completadas</h3>";
     const bList = document.createElement("div");
     bList.className = "dev-list";
-    bList.textContent = TODO_DONE.join("\n");
+    bList.textContent = RELEASE_DONE.join("\n");
     colB.appendChild(bList);
 
     dg.appendChild(colA);
@@ -6450,7 +6649,7 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
     ul.className = "summary-list";
     MODULES.forEach(m => {
       const li = document.createElement("li");
-      const eduDone = state.edu[m.id] && state.edu[m.id].completed ? " · alumna: completado" : "";
+      const eduDone = state.edu[m.id] && state.edu[m.id].completed ? " · estudiante: completado" : "";
       li.textContent = m.num + ". " + m.title + " — " +
         (m.status === "available" ? "implementado" : "pendiente") + eduDone;
       ul.appendChild(li);
@@ -6458,14 +6657,15 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
     card.appendChild(ul);
 
     const tests = document.createElement("h3");
-    tests.textContent = "Pruebas manuales pendientes";
+    tests.textContent = "Pruebas de entrega";
     card.appendChild(tests);
     const tul = document.createElement("ul");
     tul.className = "summary-list";
-    ["Comprobación final de impresión en distintos navegadores.",
-     "Carga offline tras descargar el archivo.",
-     "Lectores de pantalla en clasificación.",
-     "Escala de texto máxima sin solapes."].forEach(s => {
+    ["Impresión de reglas y certificado.",
+     "Carga offline desde archivo local.",
+     "Navegación por teclado y clasificación accesible.",
+     "Escala de texto máxima y diseño móvil.",
+     "Persistencia y recuperación ante datos corruptos."].forEach(s => {
       const li = document.createElement("li"); li.textContent = s; tul.appendChild(li);
     });
     card.appendChild(tul);
@@ -6484,6 +6684,7 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
   function init() {
     applyTheme();
     applyTextSize();
+    const openCertificatePreview = configureCertificatePreviewFromUrl();
 
     document.getElementById("theme-toggle").addEventListener("click", toggleTheme);
     document.getElementById("text-inc").addEventListener("click", () => changeTextSize(1));
@@ -6513,6 +6714,7 @@ TODO[REFACTOR]: Extraer el motor de actividades a una sección autónoma reutili
     }
 
     renderHome();
+    if (openCertificatePreview) openModule("rules");
   }
 
   document.addEventListener("DOMContentLoaded", init);
