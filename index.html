@@ -2,64 +2,42 @@
 <html lang="es">
 <!--
 Proyecto: Curso de seguridad digital y compras online
+Archivo: curso-ciberseguridad-primera-tarjeta_5.html
+Autor: Ignacio Fontán Matilla
 Versión: 1.0.0
-Fase: 7
 Estado: Final
 -->
 <!--
 ====================================================================
-HOJA DE RUTA INCORPORADA
+README - VISTA PREVIA TEMPORAL DEL CERTIFICADO
 ====================================================================
-Fase 1 — Base funcional  ............................. [HECHA]
-  Estructura HTML, diseño, navegación, accesibilidad básica,
-  persistencia (localStorage con respaldo en memoria), modo claro/oscuro,
-  control de tamaño de texto, barra de progreso, Módulo 1 completo,
-  marcadores "Próximamente" para Módulos 2-8, panel de desarrollo (DEV_MODE).
+Este bypass existe únicamente para revisar el diseño del certificado
+sin completar el curso. No modifica ni guarda el progreso del alumno.
 
-Fase 2 — Ingeniería social ........................... [HECHA]
-  Módulo 2: correos/SMS/llamadas/mensajes simulados + explicaciones.
+Uso mediante URL:
+  ?previewCertificate=1&student=Nombre%20Apellidos&score=92
 
-Fase 3 - Webs y tiendas .............................. [HECHA]
-  Módulo 3: analizador visual de URL + "¿Cuál es el dominio real?". [HECHO]
-  Módulo 4: comparador de tiendas. [HECHO]
+Parámetros:
+  previewCertificate=1  Activa la vista previa y abre el certificado.
+  student               Nombre mostrado. Si se omite: "Alumno de prueba".
+  score                 Nota entre 80 y 100. Si se omite: 100.
 
-Fase 4 — Plataformas y pagos ......................... [HECHA]
-  Módulo 5: simulaciones Wallapop/Vinted (chat). [HECHO]
-  Módulo 6: simulaciones Bizum/autorizaciones. [HECHO]
+Ejemplo al abrir este archivo localmente:
+  curso-ciberseguridad-primera-tarjeta_5.html?previewCertificate=1&student=Ana%20Prueba&score=92
 
-Fase 5 — Redes sociales e incidencias ................ [HECHA]
-  Módulo 7: sorteos, entradas, cuentas clonadas. [HECHO]
-  Módulo 8: procedimiento de respuesta ante incidentes. [HECHO]
+Uso desde la consola del navegador:
+  previewCertificate("Ana Prueba", 92)
 
-Fase 6 — Evaluación y certificado .................... [HECHA]
-  Banco de preguntas, evaluación aleatoria, repetición de errores,
-  certificado imprimible, tarjeta de reglas rápidas.
-
-Fase 7 — Revisión final .............................. [HECHA]
-  A11y, móvil, seguridad, revisión del español y limpieza final,
-  pruebas offline, refactor, impresión, almacenamiento, versión 1.0.0.
+La vista generada se identifica claramente con la marca "VISTA PREVIA".
+Eliminar este bloque y el código marcado como BYPASS TEMPORAL DE REVISIÓN
+antes de publicar una versión que no deba incluir esta función.
 ====================================================================
-
-INVENTARIO FINAL POR CATEGORÍA (trazabilidad)
---------------------------------------------------------------------
-DONE[CORE]: Cálculo de puntuación por módulo centralizado en mountQuiz()
-            (v0.8.1). Sustituye 8 copias de la lógica de nota/finalizar/repetir.
-DONE[M07]: Capturas enriquecidas con ilustraciones CSS específicas (v0.8.2).
-DONE[M08]: Ordenación mediante arrastre animado, táctil y botones (v0.8.2).
-DONE[M01]: Clasificación con arrastre opcional y alternativa por botones (v1.0.0).
-DONE[QUIZ]: Banco equilibrado, evaluación aleatoria y repetición de errores (v0.9.0).
-DONE[CERT]: Certificado y tarjeta de reglas imprimibles solo en navegador (v0.9.0).
-DONE[A11Y]: Foco, contraste, movimiento reducido y escala alta revisados (v1.0.0).
-DONE[MOBILE]: Áreas táctiles y diseño responsive validados (v1.0.0).
-DONE[SECURITY]: CSP offline y uso seguro de contenido dinámico revisados (v1.0.0).
-DONE[CONTENT]: Revisión editorial y coherencia pedagógica completadas (v1.0.0).
-DONE[TEST]: Impresión, funcionamiento offline y almacenamiento local validados (v1.0.0).
-DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones (v1.0.0).
 -->
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="light dark">
+  <meta name="author" content="Ignacio Fontán Matilla">
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src 'none'; connect-src 'none'; object-src 'none'; media-src 'none'; base-uri 'none'; form-action 'none'">
   <title>Curso de seguridad digital y compras online</title>
   <style>
@@ -221,7 +199,6 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
       border: 1px solid var(--line);
     }
     .pill.ok { background: var(--ok-soft); color: var(--ok); border-color: transparent; }
-    .pill.soon { background: var(--warn-soft); color: var(--warn); border-color: transparent; }
 
     .row { display: flex; gap: .6rem; flex-wrap: wrap; align-items: center; }
     .row.end { justify-content: flex-end; }
@@ -804,10 +781,6 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
 
     .module-footer { display: flex; gap: .6rem; flex-wrap: wrap; justify-content: space-between; margin-top: 1.2rem; }
 
-    /* tarjeta "próximamente" */
-    .soon-card .preview-list { padding-left: 1.1rem; color: var(--ink-soft); }
-    .soon-card .preview-list li { margin-bottom: .3rem; }
-
     /* evaluación final */
     .exam-intro {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -971,12 +944,6 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
       }
     }
 
-    /* panel de desarrollo */
-    #view-dev .dev-grid { display: grid; gap: .8rem; grid-template-columns: 1fr; }
-    @media (min-width: 640px) { #view-dev .dev-grid { grid-template-columns: 1fr 1fr; } }
-    .dev-list { font-family: var(--mono); font-size: .82rem; white-space: pre-wrap; }
-    .tag { display:inline-block; font-family: var(--mono); font-size: .75rem; padding: .1rem .4rem; border-radius: 5px; background: var(--surface-2); }
-
     footer.app-foot {
       max-width: 880px; margin: 0 auto; padding: 1.5rem clamp(.8rem,3vw,1.5rem) 3rem;
       color: var(--ink-faint); font-size: .82rem; border-top: 1px solid var(--line);
@@ -1010,9 +977,6 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
   </header>
 
   <main id="main">
-    <!-- =========================================================
-         VISTA: INICIO / MENÚ
-    ========================================================== -->
     <section id="view-home" class="view active" aria-label="Inicio del curso">
       <div class="card">
         <h1>Tu primera tarjeta, con seguridad</h1>
@@ -1050,7 +1014,6 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
       <div class="card">
         <div class="row between" style="align-items:baseline">
           <h2 style="margin:0">Módulos</h2>
-          <span class="small muted" id="modules-available-pct"></span>
         </div>
         <div class="modules" id="modules-list" role="list" style="margin-top:.8rem"></div>
       </div>
@@ -1061,20 +1024,11 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
       </div>
     </section>
 
-    <!-- =========================================================
-         VISTA: MÓDULO (contenido dinámico)
-    ========================================================== -->
-    <!-- Los módulos disponibles se inyectan aquí mediante sus renderizadores. -->
     <section id="view-module" class="view" aria-label="Contenido del módulo" tabindex="-1"></section>
-
-    <!-- =========================================================
-         VISTA: PANEL DE DESARROLLO (solo si DEV_MODE === true)
-    ========================================================== -->
-    <section id="view-dev" class="view" aria-label="Panel de desarrollo"></section>
   </main>
 
   <footer class="app-foot">
-    <p>Curso de seguridad digital y compras online · Funciona sin conexión · No recopila datos personales.</p>
+    <p>Curso de seguridad digital y compras online · Autor: Ignacio Fontán Matilla · Funciona sin conexión · No recopila datos personales.</p>
     <p id="foot-version" class="mono"></p>
   </footer>
 
@@ -1085,13 +1039,8 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
   ================================================================= */
   const APP = {
     version: "1.0.0",
-    phase: 7,
-    updated: "2026-06-15",
     storageKey: "cspt_v1"
   };
-
-  // Cambia a true para ver el panel de desarrollo (oculto para el estudiante).
-  const DEV_MODE = false;
 
   // BYPASS TEMPORAL DE REVISIÓN: eliminar tras validar el certificado.
   // URL: ?previewCertificate=1&student=Nombre%20Apellidos&score=92
@@ -1100,40 +1049,20 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
 
   const TEXT_STEPS = [0.9, 1, 1.15, 1.3]; // escalas disponibles
 
-  /* =================================================================
-     METADATOS DE MÓDULOS
-     status: "available" | "coming"
-  ================================================================= */
   const MODULES = [
-    { id: "m1",    num: 1,  title: "Tu primera tarjeta bancaria",        status: "available" },
-    { id: "m2",    num: 2,  title: "Phishing, smishing y vishing",       status: "available" },
-    { id: "m3",    num: 3,  title: "Cómo detectar una web fraudulenta",  status: "available" },
-    { id: "m4",    num: 4,  title: "Tiendas online fraudulentas",        status: "available" },
-    { id: "m5",    num: 5,  title: "Estafas en Wallapop y Vinted",       status: "available" },
-    { id: "m6",    num: 6,  title: "Bizum y pagos engañosos",            status: "available" },
-    { id: "m7",    num: 7,  title: "Redes sociales, sorteos y entradas", status: "available" },
-    { id: "m8",    num: 8,  title: "Qué hacer si ya he pulsado o pagado",status: "available" },
-    { id: "quiz",  num: 9,  title: "Evaluación final",                   status: "available" },
-    { id: "rules", num: 10, title: "Reglas rápidas y certificado",       status: "available" }
+    { id: "m1",    num: 1,  title: "Tu primera tarjeta bancaria" },
+    { id: "m2",    num: 2,  title: "Phishing, smishing y vishing" },
+    { id: "m3",    num: 3,  title: "Cómo detectar una web fraudulenta" },
+    { id: "m4",    num: 4,  title: "Tiendas online fraudulentas" },
+    { id: "m5",    num: 5,  title: "Estafas en Wallapop y Vinted" },
+    { id: "m6",    num: 6,  title: "Bizum y pagos engañosos" },
+    { id: "m7",    num: 7,  title: "Redes sociales, sorteos y entradas" },
+    { id: "m8",    num: 8,  title: "Qué hacer si ya he pulsado o pagado" },
+    { id: "quiz",  num: 9,  title: "Evaluación final" },
+    { id: "rules", num: 10, title: "Reglas rápidas y certificado" }
   ];
 
-  // Texto breve de las fichas "Próximamente" de cada módulo aún no disponible.
-  const COMING_PREVIEW = {
-    m2: ["Cómo reconocer correos, SMS y llamadas falsas.", "Por qué la urgencia y los premios son señales de alarma.", "Que el remitente y el número pueden falsificarse."],
-    m3: ["Qué parte de una dirección web identifica de verdad la página.", "Por qué el candado no garantiza que una web sea legítima.", "Ejercicios: ¿cuál es el dominio real?"],
-    m4: ["Señales de una tienda online fraudulenta.", "Por qué una web bonita también puede ser falsa.", "Comparar tiendas y decidir: comprar, investigar o no comprar."],
-    m5: ["Falsos compradores, vendedores y transportistas.", "Por qué todo debe quedarse dentro de la app oficial.", "Simulaciones de chat con decisiones."],
-    m6: ["Diferencia entre enviar, recibir y solicitar dinero.", "Leer toda la pantalla antes de aceptar.", "Por qué no se comparte nunca un código SMS."],
-    m7: ["Sorteos, entradas y cuentas clonadas falsas.", "Mensajes de \u201che cambiado de número\u201d.", "Códigos QR manipulados."],
-    m8: ["Pasos a seguir si ya has pulsado o pagado.", "Cómo pedir ayuda sin sentirte culpable.", "Guardar pruebas y avisar al banco y a INCIBE 017."],
-    quiz: ["Evaluación final con preguntas variadas y aleatorias.", "Repetir solo las preguntas falladas.", "Se aprueba a partir del 80 %."],
-    rules: ["Las 10 reglas que debes recordar.", "Tarjeta imprimible de reglas rápidas.", "Certificado generado solo en tu navegador."]
-  };
-
-  /* =================================================================
-     FASE 6: BANCO DE EVALUACIÓN Y REGLAS RÁPIDAS
-     Se eligen 2 preguntas por cada módulo para mantener el equilibrio.
-  ================================================================= */
+  // Se eligen dos preguntas por módulo para mantener el equilibrio.
   const FINAL_QUIZ_BANK = [
     { id: "fq-m1-1", module: "m1", stem: "Una persona que dice ser del banco te pide el PIN para comprobar tu identidad. ¿Qué haces?", options: ["Se lo doy si conoce mi nombre", "Doy solo dos cifras", "No lo comparto y contacto con el banco por su canal oficial", "Lo envío si la llamada parece urgente"], correct: 2, why: "El PIN no se comunica por llamada, mensaje ni correo. La identidad del contacto se comprueba por un canal oficial que abres tú." },
     { id: "fq-m1-2", module: "m1", stem: "¿Cuándo puede ser normal escribir número, caducidad y CVV?", options: ["En un chat con un vendedor", "En la pantalla de pago de una tienda que has comprobado y abierto tú", "En un formulario recibido por SMS", "Cuando alguien necesita enviarte dinero"], correct: 1, why: "Los datos de tarjeta se introducen en pagos iniciados por ti en comercios comprobados, no se dictan ni se envían por mensajería." },
@@ -1190,7 +1119,7 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
   ];
 
   /* =================================================================
-     CONTENIDO DEL MÓDULO 1 (completo)
+     DATOS DEL MÓDULO 1
      Datos estructurados -> fácil de ampliar.
   ================================================================= */
   const M1 = {
@@ -1198,9 +1127,7 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
       "Acaban de darte (o estás a punto de tener) tu primera tarjeta. Es tuya y la controlas tú. " +
       "En este módulo verás qué significa cada dato de la tarjeta y, sobre todo, qué se puede contar y qué no se cuenta nunca.",
 
-    // Teoría guiada: secciones con explicación + ejemplo, y una tarjeta ilustrada.
     theory: {
-      // Datos enmascarados para la tarjeta de ejemplo (NO es una tarjeta real).
       card: { number: "1234 56•• •••• 7890", exp: "09/29", cvv: "•••", holder: "TU NOMBRE" },
       sections: [
         {
@@ -1257,7 +1184,6 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
       ]
     },
 
-    // Actividad de clasificación: 4 categorías, 10 elementos.
     classify: {
       title: "Clasifica cada dato",
       intro: "Coloca cada dato en una de estas cuatro categorías. Lee primero qué significa cada una:",
@@ -1285,7 +1211,6 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
       ]
     },
 
-    // 5 preguntas de opción múltiple.
     mcq: [
       {
         id: "q1",
@@ -1349,7 +1274,6 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
       }
     ],
 
-    // 2 minicasos prácticos.
     cases: [
       {
         id: "c1",
@@ -1390,8 +1314,7 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
   };
 
   /* =================================================================
-     CONTENIDO DEL MÓDULO 2 (completo) — Phishing, smishing y vishing
-     DONE[M02-PHISHING]: escenarios interactivos implementados en la fase 2.
+     DATOS DEL MÓDULO 2 — Phishing, smishing y vishing
      Estructura: teoría guiada + escenarios (maqueta + 4 preguntas).
      Cada escenario pregunta: qué busca el atacante, qué señales son
      sospechosas (selección múltiple), qué hacer y cómo comprobarlo.
@@ -1442,7 +1365,6 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
       ]
     },
 
-    // Escenarios: uno por canal. Cada uno con maqueta + 4 preguntas.
     scenarios: [
       {
         id: "s1",
@@ -1873,7 +1795,7 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
   };
 
   /* =================================================================
-     CONTENIDO DEL MÓDULO 3 (completo) - Cómo leer una dirección web
+     DATOS DEL MÓDULO 3 — Cómo leer una dirección web
      Todos los dominios de práctica usan .example, reservado para ejemplos.
   ================================================================= */
   const M3 = {
@@ -2042,7 +1964,7 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
   };
 
   /* =================================================================
-     CONTENIDO DEL MÓDULO 4 (completo) - Comparar tiendas online
+     DATOS DEL MÓDULO 4 — Comparar tiendas online
      Tiendas, dominios, precios y datos completamente ficticios.
   ================================================================= */
   const M4 = {
@@ -2275,7 +2197,7 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
   };
 
   /* =================================================================
-     CONTENIDO DEL MÓDULO 5 (completo) - Compraventa entre particulares
+     DATOS DEL MÓDULO 5 — Compraventa entre particulares
      Conversaciones y perfiles ficticios; no reproducen una app real.
   ================================================================= */
   const M5 = {
@@ -2543,7 +2465,7 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
   };
 
   /* =================================================================
-     CONTENIDO DEL MÓDULO 6 (completo) - Bizum y autorizaciones
+     DATOS DEL MÓDULO 6 — Bizum y autorizaciones
      Pantallas, nombres, importes y operaciones completamente ficticios.
   ================================================================= */
   const M6 = {
@@ -2824,7 +2746,7 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
   };
 
   /* =================================================================
-     CONTENIDO DEL MÓDULO 7 (completo) - Redes sociales y entradas
+     DATOS DEL MÓDULO 7 — Redes sociales y entradas
      Capturas ficticias con etiquetas y pies deliberadamente neutrales.
   ================================================================= */
   const M7 = {
@@ -3085,7 +3007,7 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
   };
 
   /* =================================================================
-     CONTENIDO DEL MÓDULO 8 (completo) - Respuesta ante incidentes
+     DATOS DEL MÓDULO 8 — Respuesta ante incidentes
      El orden recomendado prioriza detener el daño y pedir ayuda.
   ================================================================= */
   const M8 = {
@@ -3415,19 +3337,15 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
   /* =================================================================
      PROGRESO EDUCATIVO
   ================================================================= */
-  function availableModuleIds() {
-    return MODULES.filter(m => m.status === "available").map(m => m.id);
+  function moduleIds() {
+    return MODULES.map(m => m.id);
   }
   function completedCount() {
-    return availableModuleIds().filter(id => state.edu[id] && state.edu[id].completed).length;
+    return moduleIds().filter(id => state.edu[id] && state.edu[id].completed).length;
   }
   function eduPercent() {
-    const total = availableModuleIds().length || 1;
+    const total = MODULES.length || 1;
     return Math.round((completedCount() / total) * 100);
-  }
-  function projectAvailablePercent() {
-    // Progreso de DESARROLLO del proyecto (módulos disponibles vs totales).
-    return Math.round((availableModuleIds().length / MODULES.length) * 100);
   }
 
   function markModuleComplete(id, best) {
@@ -3449,7 +3367,7 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
     document.getElementById("meta-edu-pct").textContent = pct + "%";
 
     // La evaluación final tiene prioridad; antes de realizarla se muestra la mejor nota de módulo.
-    const bests = availableModuleIds()
+    const bests = moduleIds()
       .map(id => state.edu[id] && typeof state.edu[id].best === "number" ? state.edu[id].best : null)
       .filter(v => v !== null);
     const displayedBest = typeof state.bestQuizScore === "number"
@@ -3465,15 +3383,11 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
 
     const txt = document.getElementById("home-progress-text");
     const done = completedCount();
-    const totalAvail = availableModuleIds().length;
+    const totalAvail = MODULES.length;
     txt.textContent = done === 0
       ? "Aún no has empezado."
       : "Has completado " + done + " de " + totalAvail + " módulos disponibles.";
 
-    document.getElementById("modules-available-pct").textContent =
-      "Disponibles: " + availableModuleIds().length + " de " + MODULES.length;
-
-    // botón continuar
     const btnContinue = document.getElementById("btn-continue");
     if (state.lastModule) {
       btnContinue.hidden = false;
@@ -3493,11 +3407,11 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
       const isDone = state.edu[m.id] && state.edu[m.id].completed;
       const savedBest = state.edu[m.id] && typeof state.edu[m.id].best === "number" ? state.edu[m.id].best : null;
       const btn = document.createElement("button");
-      btn.className = "module-item " + (m.status === "available" ? (isDone ? "done available" : "available") : "");
+      btn.className = "module-item available" + (isDone ? " done" : "");
       btn.setAttribute("role", "listitem");
       btn.setAttribute("aria-label",
         "Módulo " + m.num + ": " + m.title + ". " +
-        (m.status === "available" ? (isDone ? "Completado." : "Disponible.") : "Próximamente."));
+        (isDone ? "Completado." : "Disponible."));
 
       const num = document.createElement("span");
       num.className = "num";
@@ -3511,16 +3425,14 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
       t.textContent = m.num + ". " + m.title;
       const s = document.createElement("span");
       s.className = "s";
-      s.textContent = m.status === "available"
-        ? (isDone
-          ? "Completado" + (savedBest !== null ? " · mejor nota " + savedBest + "%" : "")
-          : (savedBest !== null ? "Mejor intento " + savedBest + "% · necesitas 80%" : "Disponible"))
-        : "Próximamente";
+      s.textContent = isDone
+        ? "Completado" + (savedBest !== null ? " · mejor nota " + savedBest + "%" : "")
+        : (savedBest !== null ? "Mejor intento " + savedBest + "% · necesitas 80%" : "Disponible");
       body.appendChild(t); body.appendChild(s);
 
       const right = document.createElement("span");
-      right.className = "pill " + (m.status === "available" ? (isDone ? "ok" : "") : "soon");
-      right.textContent = m.status === "available" ? (isDone ? "Hecho" : (savedBest !== null ? "Reintentar" : "Empezar")) : "Pronto";
+      right.className = "pill" + (isDone ? " ok" : "");
+      right.textContent = isDone ? "Hecho" : (savedBest !== null ? "Reintentar" : "Empezar");
 
       btn.appendChild(num);
       btn.appendChild(body);
@@ -3569,125 +3481,27 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
     saveState();
     const view = document.getElementById("view-module");
     view.innerHTML = "";
-    if (m.status === "available" && id === "m1") {
+    if (id === "m1") {
       renderModule1(view);
-    } else if (m.status === "available" && id === "m2") {
+    } else if (id === "m2") {
       renderModule2(view);
-    } else if (m.status === "available" && id === "m3") {
+    } else if (id === "m3") {
       renderModule3(view);
-    } else if (m.status === "available" && id === "m4") {
+    } else if (id === "m4") {
       renderModule4(view);
-    } else if (m.status === "available" && id === "m5") {
+    } else if (id === "m5") {
       renderModule5(view);
-    } else if (m.status === "available" && id === "m6") {
+    } else if (id === "m6") {
       renderModule6(view);
-    } else if (m.status === "available" && id === "m7") {
+    } else if (id === "m7") {
       renderModule7(view);
-    } else if (m.status === "available" && id === "m8") {
+    } else if (id === "m8") {
       renderModule8(view);
-    } else if (m.status === "available" && id === "quiz") {
+    } else if (id === "quiz") {
       renderFinalQuiz(view);
-    } else if (m.status === "available" && id === "rules") {
+    } else if (id === "rules") {
       renderRulesAndCertificate(view);
-    } else {
-      renderComingSoon(view, m);
     }
-    showView("module");
-    focusViewTop(view);
-  }
-
-  /* =================================================================
-     TARJETA "PRÓXIMAMENTE"
-  ================================================================= */
-  function renderComingSoon(view, m) {
-    const card = document.createElement("div");
-    card.className = "card soon-card";
-    const h = document.createElement("h2");
-    h.textContent = m.num + ". " + m.title;
-    const pill = document.createElement("span");
-    pill.className = "pill soon";
-    pill.textContent = "Próximamente";
-    pill.style.marginBottom = ".6rem";
-
-    const p = document.createElement("p");
-    p.className = "lede";
-    p.textContent = "Este módulo se añadirá en una próxima fase del curso.";
-
-    const sub = document.createElement("p");
-    sub.className = "small muted";
-    sub.textContent = "Qué aprenderás aquí:";
-
-    const ul = document.createElement("ul");
-    ul.className = "preview-list";
-    (COMING_PREVIEW[m.id] || ["Contenido en preparación."]).forEach(line => {
-      const li = document.createElement("li");
-      li.textContent = line;
-      ul.appendChild(li);
-    });
-
-    const footer = document.createElement("div");
-    footer.className = "module-footer";
-    const back = mkBtn("Volver al menú", "btn", goHome);
-    const status = mkBtn("Ver estado del proyecto", "btn ghost", openProjectStatus);
-    const nextAvail = nextAvailableModule(m.id);
-    footer.appendChild(back);
-    footer.appendChild(status);
-    if (nextAvail) {
-      footer.appendChild(mkBtn("Ir a un módulo disponible", "btn primary", () => openModule(nextAvail)));
-    }
-
-    card.appendChild(pill);
-    card.appendChild(h);
-    card.appendChild(p);
-    card.appendChild(sub);
-    card.appendChild(ul);
-    card.appendChild(footer);
-    view.appendChild(card);
-  }
-
-  function nextAvailableModule(currentId) {
-    const avail = availableModuleIds();
-    const notCurrent = avail.filter(id => id !== currentId);
-    // preferir uno no completado
-    const pending = notCurrent.find(id => !(state.edu[id] && state.edu[id].completed));
-    return pending || notCurrent[0] || null;
-  }
-
-  function openProjectStatus() {
-    const view = document.getElementById("view-module");
-    view.innerHTML = "";
-    const card = document.createElement("div");
-    card.className = "card";
-    const h = document.createElement("h2");
-    h.textContent = "Estado del curso";
-    const p = document.createElement("p");
-    p.className = "lede";
-    p.textContent = "El curso se está construyendo por fases. Esto es lo que ya puedes usar y lo que llegará.";
-
-    const grid = document.createElement("div");
-    grid.className = "grid-meta";
-    grid.appendChild(mkMeta(availableModuleIds().length + "/" + MODULES.length, "módulos disponibles"));
-    grid.appendChild(mkMeta(projectAvailablePercent() + "%", "del curso publicado"));
-    grid.appendChild(mkMeta(eduPercent() + "%", "tu progreso"));
-
-    const listTitle = document.createElement("h3");
-    listTitle.textContent = "Módulos";
-    const ul = document.createElement("ul");
-    ul.className = "summary-list";
-    MODULES.forEach(m => {
-      const li = document.createElement("li");
-      li.textContent = m.num + ". " + m.title + " — " +
-        (m.status === "available" ? "disponible" : "próximamente");
-      ul.appendChild(li);
-    });
-
-    const footer = document.createElement("div");
-    footer.className = "module-footer";
-    footer.appendChild(mkBtn("Volver al menú", "btn primary", goHome));
-
-    card.appendChild(h); card.appendChild(p); card.appendChild(grid);
-    card.appendChild(listTitle); card.appendChild(ul); card.appendChild(footer);
-    view.appendChild(card);
     showView("module");
     focusViewTop(view);
   }
@@ -4355,14 +4169,9 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
   }
 
   /* =================================================================
-     MÓDULO 1 (render completo)
-  ================================================================= */
-  /* =================================================================
      MOTOR DE CUESTIONARIO COMPARTIDO
-     DONE[CORE]: cálculo de puntuación, barra, finalizar y repetir-fallos
-     centralizados para todos los módulos evaluables. Comportamiento
-     idéntico al anterior. La clasificación (solo Módulo 1) cuenta como
-     1 ítem con nota proporcional a los aciertos.
+     La clasificación del módulo 1 cuenta como un ítem con nota
+     proporcional a sus aciertos.
   ================================================================= */
   function mountQuiz(view, cfg) {
     const results = cfg.results;
@@ -4386,7 +4195,6 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
       return Math.round((got / totalItems()) * 100);
     }
 
-    // --- barra de puntuación + finalizar ---
     const scoreCard = document.createElement("div");
     scoreCard.className = "card";
     const sb = document.createElement("div");
@@ -4521,14 +4329,12 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
   function renderModule1(view) {
     const data = M1;
 
-    // Resultados acumulados para la puntuación final.
     const results = {
       classify: { correct: 0, total: data.classify.items.length, done: false },
       questions: {} // id -> bool
     };
     const allQuestions = data.mcq.concat(data.cases);
 
-    // --- Cabecera del módulo ---
     const head = document.createElement("div");
     head.className = "card";
     head.appendChild(mkBackRow());
@@ -4541,7 +4347,6 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
     head.appendChild(intro);
     view.appendChild(head);
 
-    // --- Teoría guiada ---
     const theoryCard = document.createElement("div");
     theoryCard.className = "card";
     const th = document.createElement("h3");
@@ -4549,12 +4354,10 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
     th.style.marginTop = "0";
     theoryCard.appendChild(th);
 
-    // Tarjeta ilustrada (CSS, sin imágenes ni números reales).
     if (data.theory.card) {
       theoryCard.appendChild(buildCardMock(data.theory.card));
     }
 
-    // Secciones explicativas con ejemplo.
     data.theory.sections.forEach(sec => {
       const secH = document.createElement("h3");
       secH.textContent = sec.h;
@@ -4580,7 +4383,6 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
     });
     view.appendChild(theoryCard);
 
-    // --- Actividad de clasificación ---
     const classCard = document.createElement("div");
     classCard.className = "card";
     const ch = document.createElement("h3");
@@ -4598,7 +4400,6 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
     classCard.appendChild(classify.el);
     view.appendChild(classCard);
 
-    // --- Preguntas + minicasos ---
     const quizCard = document.createElement("div");
     quizCard.className = "card";
     const qh = document.createElement("h3");
@@ -4628,24 +4429,21 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
 
     view.appendChild(quizCard);
 
-    // --- Barra de puntuación + finalizar ---
     const quiz = mountQuiz(view, { moduleId: "m1", allQuestions: allQuestions, summary: data.summary, results: results, hasClassify: true });
     function updateScoreBar() { quiz.update(); }
     updateScoreBar();
   }
 
   /* =================================================================
-     MÓDULO 2 (render completo) — Phishing, smishing y vishing
+     RENDER DEL MÓDULO 2
   ================================================================= */
   function renderModule2(view) {
     const data = M2;
 
-    // Lista plana de todas las preguntas (para puntuación y repetición).
     const allQuestions = [];
     data.scenarios.forEach(s => s.questions.forEach(q => allQuestions.push(q)));
     const results = { questions: {} };
 
-    // --- Cabecera ---
     const head = document.createElement("div");
     head.className = "card";
     head.appendChild(mkBackRow());
@@ -4658,7 +4456,6 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
     head.appendChild(intro);
     view.appendChild(head);
 
-    // --- Teoría guiada (mismo formato que el Módulo 1) ---
     const theoryCard = document.createElement("div");
     theoryCard.className = "card";
     const th = document.createElement("h3");
@@ -4690,7 +4487,6 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
     });
     view.appendChild(theoryCard);
 
-    // --- Escenarios ---
     const exHead = document.createElement("div");
     exHead.className = "card";
     exHead.innerHTML = "<h3 style='margin-top:0'>Practica con casos reales (ficticios)</h3>";
@@ -4710,7 +4506,6 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
       tag.textContent = (idx + 1) + " · " + sc.channelLabel;
       card.appendChild(tag);
 
-      // contexto (solo en algunos escenarios, para situarlos)
       if (sc.setup) {
         const setup = document.createElement("p");
         setup.className = "small";
@@ -4719,14 +4514,12 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
         card.appendChild(setup);
       }
 
-      // maqueta visual del mensaje
       card.appendChild(renderMessageMock(sc.mock));
       const note = document.createElement("p");
       note.className = "sim-note";
       note.textContent = "Mensaje simulado con datos ficticios. Los enlaces no son reales ni se pueden pulsar.";
       card.appendChild(note);
 
-      // preguntas del escenario
       sc.questions.forEach(q => {
         const qc = renderQuestion(q, { onResult: (ok) => { results.questions[q.id] = ok; updateScoreBar(); } });
         card.appendChild(qc.el);
@@ -4735,17 +4528,15 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
       view.appendChild(card);
     });
 
-    // --- Caja de herramientas reales para comprobar enlaces ---
     view.appendChild(renderLinkToolbox());
 
-    // --- Puntuación + finalizar ---
     const quiz = mountQuiz(view, { moduleId: "m2", allQuestions: allQuestions, summary: data.summary, results: results, hasClassify: false });
     function updateScoreBar() { quiz.update(); }
     updateScoreBar();
   }
 
   /* =================================================================
-     MÓDULO 3 (render completo) - Cómo detectar una web fraudulenta
+     RENDER DEL MÓDULO 3
   ================================================================= */
   function renderModule3(view) {
     const data = M3;
@@ -4843,7 +4634,7 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
   }
 
   /* =================================================================
-     MÓDULO 4 (render completo) - Tiendas online fraudulentas
+     RENDER DEL MÓDULO 4
   ================================================================= */
   function renderModule4(view) {
     const data = M4;
@@ -4941,7 +4732,7 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
   }
 
   /* =================================================================
-     MÓDULO 5 (render completo) - Estafas en apps de compraventa
+     RENDER DEL MÓDULO 5
   ================================================================= */
   function renderModule5(view) {
     const data = M5;
@@ -5041,7 +4832,7 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
   }
 
   /* =================================================================
-     MÓDULO 6 (render completo) - Bizum y pagos engañosos
+     RENDER DEL MÓDULO 6
   ================================================================= */
   function renderModule6(view) {
     const data = M6;
@@ -5139,7 +4930,7 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
   }
 
   /* =================================================================
-     MÓDULO 7 (render completo) - Redes sociales, sorteos y entradas
+     RENDER DEL MÓDULO 7
   ================================================================= */
   function renderModule7(view) {
     const data = M7;
@@ -5224,7 +5015,7 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
   }
 
   /* =================================================================
-     MÓDULO 8 (render completo) - Qué hacer tras un incidente
+     RENDER DEL MÓDULO 8
   ================================================================= */
   function renderModule8(view) {
     const data = M8;
@@ -6382,7 +6173,6 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
       "Si aun así quieres revisar un enlace, cópialo (sin abrirlo) y analízalo con una de estas herramientas.";
     card.appendChild(intro);
 
-    // ayuda visual: cómo leer una dirección
     const barLabel = document.createElement("p");
     barLabel.className = "small muted";
     barLabel.style.margin = ".4rem 0 .1rem";
@@ -6394,7 +6184,6 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
     key.innerHTML = "Lo resaltado es el <span class='k-dom'>host</span>: la web de verdad es la parte justo antes de la primera barra (aquí, <span class='mono'>example.com</span>, no <span class='mono'>vinted.es</span>).";
     card.appendChild(key);
 
-    // herramientas
     const tools = [
       { ico: "VT", name: "VirusTotal", desc: "Analiza un enlace con más de 70 motores antivirus.", url: "https://www.virustotal.com/gui/home/url" },
       { ico: "GSB", name: "Google Safe Browsing", desc: "Dice si Google ha marcado una web como peligrosa.", url: "https://transparencyreport.google.com/safe-browsing/search" },
@@ -6430,7 +6219,6 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
     });
     card.appendChild(box);
 
-    // avisos para no generar falsa seguridad
     const cav = document.createElement("div");
     cav.className = "caveats";
     const ct = document.createElement("strong");
@@ -6520,7 +6308,6 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
     c.appendChild(num);
     c.appendChild(rowm);
 
-    // Pie con el CVV (en el reverso real) y aviso de ejemplo.
     const back = document.createElement("div");
     back.className = "cm-back small muted";
     back.innerHTML = "CVV (detrás): <span class='mono'>" + card.cvv + "</span> · ejemplo, no es una tarjeta real";
@@ -6554,128 +6341,7 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
     studentName = "";
     saveState();
     goHome();
-    openModule(availableModuleIds()[0] || "m1");
-  }
-
-  /* =================================================================
-     PANEL DE DESARROLLO (solo DEV_MODE)
-  ================================================================= */
-  // Inventario final de la versión 1.0.0.
-  const RELEASE_PENDING = [];
-  const RELEASE_DONE = [
-    "DONE[CORE]: Arquitectura, navegación y vistas.",
-    "DONE[CORE]: Persistencia localStorage con respaldo en memoria.",
-    "DONE[CORE]: Modo claro/oscuro recordado.",
-    "DONE[CORE]: Control de tamaño de texto recordado.",
-    "DONE[CORE]: Barra de progreso educativo.",
-    "DONE[CORE]: Motor reutilizable MCQ + clasificación accesible.",
-    "DONE[CORE]: Puntuación/finalizar/repetir centralizados en mountQuiz() — 8 copias unificadas (v0.8.1).",
-    "DONE[M07-SOCIAL]: Cinco ilustraciones CSS específicas para las capturas simuladas (v0.8.2).",
-    "DONE[M08-ORDER]: Arrastre animado y táctil con alternativa accesible mediante botones (v0.8.2).",
-    "DONE[QUIZ]: Banco de 32 preguntas, selección equilibrada de 16, aprobado al 80% y repetición de errores (v0.9.0).",
-    "DONE[CERT]: Reglas rápidas y certificado imprimibles, generados solo en el navegador (v0.9.0).",
-    "DONE[M01-DRAG]: Clasificación con arrastre opcional y botones accesibles (v1.0.0).",
-    "DONE[A11Y]: Contraste, foco, escala alta, movimiento reducido y nombres accesibles revisados (v1.0.0).",
-    "DONE[MOBILE]: Controles táctiles y diseño responsive validados (v1.0.0).",
-    "DONE[SECURITY]: CSP offline, navegación externa y contenido dinámico revisados (v1.0.0).",
-    "DONE[TEST]: Recorridos, persistencia, datos corruptos, impresión y carga offline validados (v1.0.0).",
-    "DONE[M01]: Módulo 1 completo (teoría, clasificación, 5 MCQ, 2 minicasos, resumen, repetir fallos).",
-    "DONE[M01-CONTENT]: Categorías de clasificación reescritas y leyenda de definiciones (v0.1.1).",
-    "DONE[M01-CONTENT]: Teoría reescrita en secciones didácticas con ejemplos y tarjeta ilustrada (v0.1.2).",
-    "DONE[M02-PHISHING]: Módulo 2 completo (teoría + 5 escenarios con maquetas y 4 preguntas, selección múltiple) (v0.2.0).",
-    "DONE[M02-PHISHING]: Maquetas de alta fidelidad, 2 escenarios legítimos + 1 ambiguo (veredicto) y caja de herramientas reales (VirusTotal/Safe Browsing/urlscan) (v0.2.1).",
-    "DONE[CONTENT]: Verificación legítima con datos parciales diferenciada de la petición de secretos o códigos (v0.2.2).",
-    "DONE[M03-URL]: Teoría, analizador visual, 5 retos de dominio y 5 preguntas de decisión (v0.3.0).",
-    "DONE[M03-URL]: El dominio correcto deja de destacar antes de responder y solo se revela después (v0.3.1).",
-    "DONE[M04-SHOPS]: Teoría, comparador de 5 tiendas y 5 preguntas sobre identidad, precio, reputación y pago (v0.4.0).",
-    "DONE[M05-MARKETPLACES]: Teoría y 5 chats de compraventa con 10 decisiones sobre pago, envío y protección (v0.5.0).",
-    "DONE[M06-BIZUM]: Teoría y 5 pantallas bancarias con 10 decisiones sobre enviar, recibir, solicitar y autorizar (v0.6.0).",
-    "DONE[M06-BIZUM]: Pantallas más realistas y textos neutrales sin pistas previas sobre la respuesta (v0.6.1).",
-    "DONE[M07-SOCIAL]: Teoría y 5 capturas neutrales con 10 decisiones sobre cuentas, sorteos, entradas y QR (v0.8.0).",
-    "DONE[M08-INCIDENT]: Teoría, 3 actividades de ordenación y 7 decisiones de respuesta ante incidentes (v0.8.0)."
-  ];
-
-  function renderDevPanel() {
-    const view = document.getElementById("view-dev");
-    view.innerHTML = "";
-    const card = document.createElement("div");
-    card.className = "card";
-    const h = document.createElement("h2");
-    h.textContent = "Panel de desarrollo (DEV_MODE)";
-    card.appendChild(h);
-
-    const meta = document.createElement("p");
-    meta.className = "small";
-    meta.innerHTML =
-      "<span class='tag'>v" + APP.version + "</span> " +
-      "<span class='tag'>Fase " + APP.phase + "</span> " +
-      "<span class='tag'>" + APP.updated + "</span> " +
-      "<span class='tag'>storage: " + (storageOK ? "ok" : "memoria") + "</span>";
-    card.appendChild(meta);
-
-    const grid = document.createElement("div");
-    grid.className = "grid-meta";
-    grid.appendChild(mkMeta(projectAvailablePercent() + "%", "implementación"));
-    grid.appendChild(mkMeta(availableModuleIds().length + "/" + MODULES.length, "módulos disponibles"));
-    grid.appendChild(mkMeta(RELEASE_DONE.length + "", "validaciones"));
-    grid.appendChild(mkMeta(RELEASE_PENDING.length + "", "pendientes"));
-    card.appendChild(grid);
-
-    const dg = document.createElement("div");
-    dg.className = "dev-grid";
-
-    const colA = document.createElement("div");
-    colA.innerHTML = "<h3>Pendientes</h3>";
-    const aList = document.createElement("div");
-    aList.className = "dev-list";
-    aList.textContent = RELEASE_PENDING.length ? RELEASE_PENDING.join("\n") : "Ninguno.";
-    colA.appendChild(aList);
-
-    const colB = document.createElement("div");
-    colB.innerHTML = "<h3>Validaciones completadas</h3>";
-    const bList = document.createElement("div");
-    bList.className = "dev-list";
-    bList.textContent = RELEASE_DONE.join("\n");
-    colB.appendChild(bList);
-
-    dg.appendChild(colA);
-    dg.appendChild(colB);
-    card.appendChild(dg);
-
-    const st = document.createElement("h3");
-    st.textContent = "Estado por módulo";
-    card.appendChild(st);
-    const ul = document.createElement("ul");
-    ul.className = "summary-list";
-    MODULES.forEach(m => {
-      const li = document.createElement("li");
-      const eduDone = state.edu[m.id] && state.edu[m.id].completed ? " · estudiante: completado" : "";
-      li.textContent = m.num + ". " + m.title + " — " +
-        (m.status === "available" ? "implementado" : "pendiente") + eduDone;
-      ul.appendChild(li);
-    });
-    card.appendChild(ul);
-
-    const tests = document.createElement("h3");
-    tests.textContent = "Pruebas de entrega";
-    card.appendChild(tests);
-    const tul = document.createElement("ul");
-    tul.className = "summary-list";
-    ["Impresión de reglas y certificado.",
-     "Carga offline desde archivo local.",
-     "Navegación por teclado y clasificación accesible.",
-     "Escala de texto máxima y diseño móvil.",
-     "Persistencia y recuperación ante datos corruptos."].forEach(s => {
-      const li = document.createElement("li"); li.textContent = s; tul.appendChild(li);
-    });
-    card.appendChild(tul);
-
-    const footer = document.createElement("div");
-    footer.className = "module-footer";
-    footer.appendChild(mkBtn("Volver al menú", "btn primary", goHome));
-    card.appendChild(footer);
-
-    view.appendChild(card);
+    openModule(moduleIds()[0] || "m1");
   }
 
   /* =================================================================
@@ -6691,27 +6357,16 @@ DONE[REFACTOR]: Motores de actividades y evaluación consolidados por secciones 
     document.getElementById("text-dec").addEventListener("click", () => changeTextSize(-1));
     document.getElementById("text-reset").addEventListener("click", resetTextSize);
 
-    document.getElementById("btn-start").addEventListener("click", () => openModule(availableModuleIds()[0] || "m1"));
+    document.getElementById("btn-start").addEventListener("click", () => openModule(moduleIds()[0] || "m1"));
     document.getElementById("btn-continue").addEventListener("click", () => {
       if (state.lastModule) openModule(state.lastModule);
-      else openModule(availableModuleIds()[0] || "m1");
+      else openModule(moduleIds()[0] || "m1");
     });
     document.getElementById("btn-reset-progress").addEventListener("click", resetProgress);
     document.getElementById("btn-restart").addEventListener("click", restartCourse);
 
     document.getElementById("foot-version").textContent =
-      "v" + APP.version + " · Fase " + APP.phase + (storageOK ? "" : " · (almacenamiento no disponible: el progreso no se guardará al cerrar)");
-
-    if (DEV_MODE) {
-      // Acceso al panel desde el menú cuando DEV_MODE está activo.
-      const devBtn = mkBtn("Panel de desarrollo", "btn ghost small", () => { renderDevPanel(); showView("dev"); });
-      const homeView = document.getElementById("view-home");
-      const holder = document.createElement("div");
-      holder.className = "row";
-      holder.style.marginTop = ".6rem";
-      holder.appendChild(devBtn);
-      homeView.appendChild(holder);
-    }
+      "v" + APP.version + (storageOK ? "" : " · (almacenamiento no disponible: el progreso no se guardará al cerrar)");
 
     renderHome();
     if (openCertificatePreview) openModule("rules");
