@@ -2,9 +2,9 @@
 <html lang="es">
 <!--
 Proyecto: Curso de seguridad digital y compras online
-Archivo: curso-ciberseguridad-primera-tarjeta_5.html
+Archivo: curso-ciberseguridad-primera-tarjeta_6.html
 Autor: Ignacio Fontán Matilla
-Versión: 1.0.0
+Versión: 1.1.0
 Estado: Final
 -->
 <!--
@@ -987,7 +987,7 @@ antes de publicar una versión que no deba incluir esta función.
 
         <div class="grid-meta">
           <div class="meta-box"><div class="n" id="meta-modules">10</div><div class="l">módulos</div></div>
-          <div class="meta-box"><div class="n">~55&nbsp;min</div><div class="l">duración estimada</div></div>
+          <div class="meta-box"><div class="n">~75&nbsp;min</div><div class="l">duración estimada</div></div>
           <div class="meta-box"><div class="n" id="meta-edu-pct">0%</div><div class="l">tu progreso</div></div>
           <div class="meta-box"><div class="n" id="meta-best">&mdash;</div><div class="l">mejor nota</div></div>
         </div>
@@ -1038,7 +1038,7 @@ antes de publicar una versión que no deba incluir esta función.
      CONFIGURACIÓN GENERAL
   ================================================================= */
   const APP = {
-    version: "1.0.0",
+    version: "1.1.0",
     storageKey: "cspt_v1"
   };
 
@@ -1058,8 +1058,11 @@ antes de publicar una versión que no deba incluir esta función.
     { id: "m6",    num: 6,  title: "Bizum y pagos engañosos" },
     { id: "m7",    num: 7,  title: "Redes sociales, sorteos y entradas" },
     { id: "m8",    num: 8,  title: "Qué hacer si ya he pulsado o pagado" },
-    { id: "quiz",  num: 9,  title: "Evaluación final" },
-    { id: "rules", num: 10, title: "Reglas rápidas y certificado" }
+    { id: "m9",    num: 9,  title: "Resumen de referencia", type: "reference" },
+    { id: "m10",   num: 10, title: "Identidad digital y cuentas", type: "optional" },
+    { id: "m11",   num: 11, title: "Privacidad y huella digital", type: "optional" },
+    { id: "quiz",  num: 12, title: "Evaluación final" },
+    { id: "rules", num: 13, title: "Reglas rápidas y certificado" }
   ];
 
   // Se eligen dos preguntas por módulo para mantener el equilibrio.
@@ -3197,6 +3200,236 @@ antes de publicar una versión que no deba incluir esta función.
   };
 
   /* =================================================================
+     DATOS DEL MÓDULO 9 — Resumen de referencia
+  ================================================================= */
+  const M9 = {
+    intro:
+      "Una guía rápida para consultar después de hacer el curso. Resume las ideas clave sin añadir pruebas nuevas.",
+    heading: "Consulta rápida",
+    sections: [
+      {
+        h: "Regla base: no respondas desde la presión",
+        body: [
+          "Muchas estafas empiezan con urgencia, miedo o una oportunidad demasiado buena. Antes de pulsar, pagar o responder, para unos segundos.",
+          "Si el mensaje te empuja a actuar ya, usa el método seguro: cierra, abre tú el canal oficial y comprueba desde ahí."
+        ],
+        items: [
+          "No uses enlaces recibidos para entrar en cuentas sensibles.",
+          "No llames a teléfonos incluidos en mensajes sospechosos.",
+          "No compartas códigos, PIN, CVV ni contraseñas."
+        ]
+      },
+      {
+        h: "Datos, códigos y tarjeta",
+        body: [
+          "Número de tarjeta, caducidad y CVV solo se escriben al pagar en una web o app fiable que has abierto tú.",
+          "PIN, contraseña bancaria y códigos de un solo uso no se dictan ni se reenvían. Si alguien los pide por llamada, chat o correo, corta la conversación."
+        ],
+        items: [
+          "Para cobrar no hace falta entregar la tarjeta.",
+          "Un canal oficial puede pedir datos parciales si tú has iniciado el contacto.",
+          "Una autorización real del banco puede aprobar una operación falsa: lee siempre los detalles."
+        ]
+      },
+      {
+        h: "Mensajes, webs y tiendas",
+        body: [
+          "El remitente, el logotipo y el número mostrado pueden falsificarse. La apariencia no demuestra identidad.",
+          "En una URL, el dominio real manda. El candado cifra la conexión, pero no convierte la web en legítima."
+        ],
+        items: [
+          "Compara el dominio completo con el oficial.",
+          "Desconfía de descuentos extremos y pagos irreversibles.",
+          "Busca identidad, condiciones y reputación fuera de la propia tienda."
+        ]
+      },
+      {
+        h: "Compraventa, Bizum y redes",
+        body: [
+          "En plataformas de compraventa, mantén chat, pago y envío dentro de la app. Una captura no prueba que hayas cobrado.",
+          "En redes, una cuenta puede copiar nombre, foto y estilo. Confirma las peticiones urgentes por un canal que ya conocías."
+        ],
+        items: [
+          "Aceptar una solicitud de dinero suele significar pagar.",
+          "Un QR es un enlace oculto: revisa el destino antes de iniciar sesión.",
+          "Una entrada en PDF o imagen puede estar duplicada."
+        ]
+      },
+      {
+        h: "Si ya ha pasado algo",
+        body: [
+          "No lo ocultes por vergüenza. Actuar pronto suele limitar el daño.",
+          "Detén la interacción, contacta con banco o plataforma por canales oficiales, protege cuentas y guarda pruebas."
+        ],
+        items: [
+          "Mensajes, direcciones, perfiles, recibos y movimientos sirven como evidencia.",
+          "Cambia contraseñas reutilizadas.",
+          "En España, el 017 de INCIBE puede orientar de forma gratuita y confidencial."
+        ]
+      }
+    ],
+    summary: [
+      "Para, comprueba y decide desde un canal que abras tú.",
+      "No compartas secretos ni códigos.",
+      "Lee acción, importe, destinatario y dominio real.",
+      "Para cobrar no pagues ni entregues datos de tarjeta.",
+      "Si ocurre algo, pide ayuda pronto y guarda pruebas."
+    ]
+  };
+
+  /* =================================================================
+     DATOS DEL MÓDULO 10 — Identidad digital y cuentas
+  ================================================================= */
+  const M10 = {
+    intro:
+      "Módulo opcional para entender mejor cómo se protegen las cuentas: contraseñas, recuperación, sesiones y verificación en dos pasos.",
+    heading: "Proteger tus cuentas antes de que pase nada",
+    optional: true,
+    sections: [
+      {
+        h: "Tu cuenta es más que una contraseña",
+        body: [
+          "Una cuenta incluye usuario, contraseña, correo de recuperación, teléfono, sesiones abiertas y dispositivos conectados.",
+          "Si una persona controla tu correo principal, puede intentar recuperar otras cuentas. Por eso el correo merece tanta protección como la banca o las redes sociales."
+        ],
+        items: [
+          "Revisa qué correo y teléfono están asociados.",
+          "Mantén actualizados los métodos de recuperación.",
+          "No compartas capturas con códigos o enlaces de recuperación."
+        ]
+      },
+      {
+        h: "Contraseñas únicas",
+        body: [
+          "Reutilizar una contraseña es peligroso porque una filtración en un servicio pequeño puede permitir intentos de acceso en servicios importantes.",
+          "Una contraseña larga y única suele ser mejor que una corta con símbolos difíciles de recordar."
+        ],
+        example: "Si usas la misma clave en una tienda y en tu correo, un atacante que consiga la de la tienda puede probarla en el correo."
+      },
+      {
+        h: "Gestores de contraseñas",
+        body: [
+          "Un gestor de contraseñas guarda claves largas y diferentes para cada sitio. Tú recuerdas una clave maestra y el gestor rellena las demás.",
+          "También ayuda a detectar páginas falsas: si el gestor no rellena la contraseña donde esperabas, puede que no estés en el dominio correcto."
+        ],
+        items: [
+          "Usa una clave maestra larga.",
+          "Activa bloqueo del dispositivo.",
+          "No guardes claves en notas o chats."
+        ]
+      },
+      {
+        h: "Doble factor, apps y passkeys",
+        body: [
+          "La verificación en dos pasos añade una segunda prueba además de la contraseña. Puede ser un código SMS, una app autenticadora, una notificación o una passkey.",
+          "El SMS es mejor que no tener nada, pero una app autenticadora o una passkey suelen resistir mejor engaños y cambios de SIM."
+        ],
+        items: [
+          "Guarda códigos de recuperación en un lugar seguro.",
+          "No apruebes notificaciones que no has iniciado.",
+          "No dictes códigos aunque la otra persona diga ser soporte."
+        ]
+      },
+      {
+        h: "Sesiones y dispositivos",
+        body: [
+          "Muchas cuentas permiten ver dónde has iniciado sesión. Revisarlo de vez en cuando ayuda a detectar accesos extraños.",
+          "Si sospechas de una cuenta, cambia la contraseña desde el sitio oficial y cierra las demás sesiones."
+        ],
+        items: [
+          "Cierra sesiones en dispositivos que ya no usas.",
+          "Retira apps conectadas que no reconozcas.",
+          "Activa avisos de inicio de sesión cuando existan."
+        ]
+      }
+    ],
+    summary: [
+      "Usa contraseñas únicas.",
+      "Protege especialmente el correo principal.",
+      "Activa verificación en dos pasos.",
+      "Revisa sesiones y dispositivos conectados.",
+      "Ten preparados métodos de recuperación seguros."
+    ]
+  };
+
+  /* =================================================================
+     DATOS DEL MÓDULO 11 — Privacidad y huella digital
+  ================================================================= */
+  const M11 = {
+    intro:
+      "Módulo opcional para pensar con más criterio sobre la información que publicas, los perfiles falsos y la manipulación con datos personales.",
+    heading: "Lo que otros pueden aprender de ti",
+    optional: true,
+    sections: [
+      {
+        h: "Huella digital",
+        body: [
+          "Tu huella digital es el rastro que dejas al publicar, comprar, registrarte, comentar o aparecer en fotos.",
+          "No todo rastro es malo. El objetivo es decidir qué información merece estar visible y cuál puede facilitar que alguien te engañe."
+        ],
+        items: [
+          "Nombre de usuario repetido en varias plataformas.",
+          "Fotos con uniforme, centro, barrio o rutinas.",
+          "Fechas, viajes, eventos y relaciones visibles."
+        ]
+      },
+      {
+        h: "Ingeniería social con información pública",
+        body: [
+          "Un atacante puede usar datos reales para sonar convincente: nombres de amigos, aficiones, compras recientes o lugares que frecuentas.",
+          "Cuanto más personalizado es un engaño, menos parece un mensaje genérico. Por eso conviene verificar por canales independientes."
+        ],
+        example: "Si publicas que vas a un concierto, alguien puede escribirte después ofreciendo entradas falsas para ese mismo evento."
+      },
+      {
+        h: "Privacidad en redes",
+        body: [
+          "Las opciones de privacidad no son una barrera perfecta, pero reducen exposición. Revisa quién puede ver publicaciones, historias, seguidores, etiquetas y ubicación.",
+          "Piensa también en las cuentas antiguas: a veces contienen información que ya no publicarías hoy."
+        ],
+        items: [
+          "Limita quién puede etiquetarte.",
+          "Revisa publicaciones antiguas.",
+          "Oculta datos de contacto cuando no sean necesarios."
+        ]
+      },
+      {
+        h: "Imágenes, voz e IA",
+        body: [
+          "Hoy es fácil copiar imágenes, generar textos convincentes o imitar estilos. Eso no significa desconfiar de todo, sino pedir una comprobación mejor cuando algo implique dinero, códigos o datos.",
+          "Una nota de voz, una captura o una foto no siempre prueban identidad. Para peticiones importantes, usa una llamada o canal previo que ya conocías."
+        ]
+      },
+      {
+        h: "Seguimiento, cookies y anuncios",
+        body: [
+          "Al navegar, muchas webs intentan recordar visitas, medir comportamiento o personalizar anuncios. No todo seguimiento es fraude, pero sí afecta a tu privacidad.",
+          "Aceptar menos permisos y revisar la configuración ayuda a reducir exposición innecesaria."
+        ],
+        items: [
+          "No des permisos de ubicación o cámara si no hacen falta.",
+          "Revisa permisos de apps instaladas.",
+          "Desconfía de formularios que piden más datos de los necesarios."
+        ]
+      },
+      {
+        h: "Pregunta antes de publicar",
+        body: [
+          "Antes de publicar algo, pregúntate: ¿ayudaría esto a alguien a hacerse pasar por mí, adivinar una respuesta de seguridad o crear una excusa creíble?",
+          "Privacidad no significa esconderse: significa elegir con intención."
+        ]
+      }
+    ],
+    summary: [
+      "La información pública puede hacer más creíble una estafa.",
+      "Revisa privacidad, etiquetas, ubicación y cuentas antiguas.",
+      "Fotos, voces y capturas pueden manipularse.",
+      "Da solo los permisos y datos necesarios.",
+      "Antes de publicar, piensa cómo podría usarse fuera de contexto."
+    ]
+  };
+
+  /* =================================================================
      ESTADO + PERSISTENCIA (con respaldo en memoria si no hay storage)
   ================================================================= */
   const defaultState = () => ({
@@ -3425,14 +3658,15 @@ antes de publicar una versión que no deba incluir esta función.
       t.textContent = m.num + ". " + m.title;
       const s = document.createElement("span");
       s.className = "s";
+      const moduleKind = m.type === "optional" ? "Opcional" : (m.type === "reference" ? "Referencia" : "Disponible");
       s.textContent = isDone
         ? "Completado" + (savedBest !== null ? " · mejor nota " + savedBest + "%" : "")
-        : (savedBest !== null ? "Mejor intento " + savedBest + "% · necesitas 80%" : "Disponible");
+        : (savedBest !== null ? "Mejor intento " + savedBest + "% · necesitas 80%" : moduleKind);
       body.appendChild(t); body.appendChild(s);
 
       const right = document.createElement("span");
       right.className = "pill" + (isDone ? " ok" : "");
-      right.textContent = isDone ? "Hecho" : (savedBest !== null ? "Reintentar" : "Empezar");
+      right.textContent = isDone ? "Hecho" : (m.type === "optional" ? "Opcional" : (m.type === "reference" ? "Referencia" : (savedBest !== null ? "Reintentar" : "Empezar")));
 
       btn.appendChild(num);
       btn.appendChild(body);
@@ -3497,6 +3731,12 @@ antes de publicar una versión que no deba incluir esta función.
       renderModule7(view);
     } else if (id === "m8") {
       renderModule8(view);
+    } else if (id === "m9") {
+      renderModule9(view);
+    } else if (id === "m10") {
+      renderModule10(view);
+    } else if (id === "m11") {
+      renderModule11(view);
     } else if (id === "quiz") {
       renderFinalQuiz(view);
     } else if (id === "rules") {
@@ -5096,7 +5336,123 @@ antes de publicar una versión que no deba incluir esta función.
   }
 
   /* =================================================================
-     MÓDULO 9 - EVALUACIÓN FINAL
+     RENDER DE MÓDULOS SOLO DE TEORÍA
+  ================================================================= */
+  function renderTheoryOnlyModule(view, cfg) {
+    markModuleComplete(cfg.moduleId);
+
+    const head = document.createElement("div");
+    head.className = "card";
+    head.appendChild(mkBackRow());
+    const h = document.createElement("h2");
+    h.textContent = cfg.title;
+    head.appendChild(h);
+    const intro = document.createElement("p");
+    intro.className = "lede";
+    intro.textContent = cfg.data.intro;
+    head.appendChild(intro);
+    if (cfg.data.optional) {
+      const optional = document.createElement("div");
+      optional.className = "notice";
+      optional.textContent = "Módulo opcional: amplía criterio y protección, pero no es necesario para obtener el certificado.";
+      head.appendChild(optional);
+    }
+    view.appendChild(head);
+
+    const theoryCard = document.createElement("div");
+    theoryCard.className = "card";
+    const th = document.createElement("h3");
+    th.textContent = cfg.data.heading;
+    th.style.marginTop = "0";
+    theoryCard.appendChild(th);
+
+    cfg.data.sections.forEach(sec => {
+      const secH = document.createElement("h3");
+      secH.textContent = sec.h;
+      theoryCard.appendChild(secH);
+      (sec.body || []).forEach(par => {
+        const p = document.createElement("p");
+        p.textContent = par;
+        theoryCard.appendChild(p);
+      });
+      if (sec.items && sec.items.length) {
+        const ul = document.createElement("ul");
+        ul.className = "summary-list";
+        sec.items.forEach(item => {
+          const li = document.createElement("li");
+          li.textContent = item;
+          ul.appendChild(li);
+        });
+        theoryCard.appendChild(ul);
+      }
+      if (sec.example) {
+        const ex = document.createElement("div");
+        ex.className = "example";
+        const tag = document.createElement("span");
+        tag.className = "example-tag";
+        tag.textContent = "Ejemplo";
+        const exP = document.createElement("p");
+        exP.style.margin = "0";
+        exP.textContent = sec.example;
+        ex.appendChild(tag);
+        ex.appendChild(exP);
+        theoryCard.appendChild(ex);
+      }
+    });
+    view.appendChild(theoryCard);
+
+    const summaryCard = document.createElement("div");
+    summaryCard.className = "card";
+    const sh = document.createElement("h3");
+    sh.style.marginTop = "0";
+    sh.textContent = "Qué recordar";
+    summaryCard.appendChild(sh);
+    const ul = document.createElement("ul");
+    ul.className = "summary-list";
+    cfg.data.summary.forEach(item => {
+      const li = document.createElement("li");
+      li.textContent = item;
+      ul.appendChild(li);
+    });
+    summaryCard.appendChild(ul);
+
+    const footer = document.createElement("div");
+    footer.className = "module-footer";
+    footer.appendChild(mkBtn("Volver al menú", "btn primary", goHome));
+    if (cfg.nextId) footer.appendChild(mkBtn("Siguiente módulo", "btn", () => openModule(cfg.nextId)));
+    summaryCard.appendChild(footer);
+    view.appendChild(summaryCard);
+  }
+
+  function renderModule9(view) {
+    renderTheoryOnlyModule(view, {
+      moduleId: "m9",
+      title: "Módulo 9. Resumen de referencia",
+      data: M9,
+      nextId: "m10"
+    });
+  }
+
+  function renderModule10(view) {
+    renderTheoryOnlyModule(view, {
+      moduleId: "m10",
+      title: "Módulo 10. Identidad digital y cuentas",
+      data: M10,
+      nextId: "m11"
+    });
+  }
+
+  function renderModule11(view) {
+    renderTheoryOnlyModule(view, {
+      moduleId: "m11",
+      title: "Módulo 11. Privacidad y huella digital",
+      data: M11,
+      nextId: "quiz"
+    });
+  }
+
+  /* =================================================================
+     EVALUACIÓN FINAL
   ================================================================= */
   function shuffledCopy(items) {
     const copy = items.slice();
@@ -5440,7 +5796,7 @@ antes de publicar una versión que no deba incluir esta función.
   }
 
   /* =================================================================
-     MÓDULO 10 - REGLAS RÁPIDAS Y CERTIFICADO
+     REGLAS RÁPIDAS Y CERTIFICADO
   ================================================================= */
   function printOnly(element) {
     document.querySelectorAll(".print-target").forEach(item => item.classList.remove("print-target"));
@@ -5465,7 +5821,7 @@ antes de publicar una versión que no deba incluir esta función.
     h.textContent = "Reglas rápidas y certificado";
     const intro = document.createElement("p");
     intro.className = "lede";
-    intro.textContent = "Guarda estas reglas como referencia. La tarjeta y el certificado se generan e imprimen localmente desde este navegador.";
+    intro.textContent = "Guarda estas reglas como referencia. La tarjeta y el certificado se generan e imprimen localmente desde este navegador. Los módulos opcionales amplían el curso, pero no son necesarios para obtener el certificado.";
     head.appendChild(h);
     head.appendChild(intro);
     view.appendChild(head);
